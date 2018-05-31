@@ -1,20 +1,22 @@
-package com.htdata.iiot;
+package com.htdata.iiot.hdfs2tsdb;
 
-import com.htdata.iiot.tool.HFileAnalysis;
-import com.htdata.iiot.tool.Tools;
+import com.htdata.iiot.hdfs2tsdb.tool.HFileAnalysis;
+import com.htdata.iiot.hdfs2tsdb.tool.Tools;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.LongAdder;
 
 
 public class Start {
     private static Logger log = Logger.getLogger(Start.class);
+    public static LongAdder longAdder = new LongAdder();
+    public static LongAdder metricAdder = new LongAdder();
 
     public static void main(String[] args) {
 

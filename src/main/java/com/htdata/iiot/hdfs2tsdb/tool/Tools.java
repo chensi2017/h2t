@@ -1,4 +1,4 @@
-package com.htdata.iiot.tool;
+package com.htdata.iiot.hdfs2tsdb.tool;
 
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;

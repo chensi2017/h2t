@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'eclipse'
-mainClassName = ''
+mainClassName = 'com.htdata.iiot.hdfs2tsdb.Start'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -31,9 +31,15 @@ task copyJars(type: Copy) {
     into 'dist' // 目标位置
 }
 
+applicationDistribution.from('src/main/resources/conf'){
+    into "bin/conf"
+}
+
 
 dependencies {
+    compile('redis.clients:jedis:2.9.0')
     compile group: 'com.alibaba', name: 'fastjson', version:'1.2.31'
+    compile group: 'com.htiiot.common', name: 'common-shared', version:'0.0.1-SNAPSHOT'
     compile ('org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
