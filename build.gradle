@@ -1,0 +1,64 @@
+group 'h2t'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+mainClassName = ''
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+repositories {
+
+    mavenLocal()
+    mavenCentral()
+    maven { url 'http://124.207.207.21:62125/repository/maven-central/' }
+    maven { url 'http://124.207.207.21:62125/repository/maven-releases/' }
+    maven { url 'http://124.207.207.21:62125/repository/maven-snapshots/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "http://repo.maven.apache.org/maven2" }
+
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
+task copyJars(type: Copy) {
+    from configurations.runtime
+    into 'dist' // 目标位置
+}
+
+
+dependencies {
+    compile group: 'com.alibaba', name: 'fastjson', version:'1.2.31'
+    compile ('org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version:'1.5.4.RELEASE'
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+    compile ('com.zaxxer:HikariCP:2.5.1')
+    compile ('net.opentsdb:opentsdb:2.3.0') {
+        exclude group: 'io.netty', module: 'netty'
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+        exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+        exclude group: 'net.opentsdb', module: 'opentsdb_gwt_theme'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'com.google.gwt', module: 'gwt-user'
+    }
+    compile group: 'com.htiiot.common', name: 'common-shared', version: '0.0.1-SNAPSHOT', changing: true
+    compile group: 'junit', name: 'junit', version: '4.12'
+
+    compile group: 'org.apache.hadoop', name: 'hadoop-client', version: '2.7.3'
+    compile group: 'org.apache.hadoop', name: 'hadoop-common', version: '2.7.3'
+    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '2.7.3'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
