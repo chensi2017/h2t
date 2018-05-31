@@ -54,7 +54,7 @@ public class HFileAnalysis {
         String[] strs = line.split(",");
         String tid = strs[0];
         String did = strs[1];
-        long ts = Long.parseLong(strs[3]);
+        long ts = Long.parseLong(strs[2]);
         String[] values = Arrays.copyOfRange(strs, 3, strs.length);
         String key = "k2h:"+tid+":"+did;
         Jedis jedis = JedisMultiPool.getJedis();
