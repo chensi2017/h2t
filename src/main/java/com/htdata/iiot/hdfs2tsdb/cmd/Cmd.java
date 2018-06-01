@@ -8,7 +8,8 @@ public class Cmd {
 		Options options = new Options();
 		options.addOption("h", "help", false, "Print this usage information");
 		options.addOption("t", "threads", true, "The number of threads,advice set as the numbers of the partition");
-		options.addOption("p","path",true,"The directory path in HDFS");
+		options.addOption("hp","hdfspath",true,"The directory path in HDFS");
+		options.addOption("tad","tsdbapiaddr",true,"The tsdb api address");
 		options.addOption("z", "zookeeper", true, "The connection info of zk,like:master.htdata.com:2181");
 		options.addOption("d", "debug", false, "debug");
 		CommandLine cmd=null;
@@ -27,8 +28,11 @@ public class Cmd {
 			formatter.printHelp("TSDStore", options);
 			System.exit(0);
 		}
-		if(cmd.hasOption("p")){
-			Configs.HdfsConfig.HDFS_PATH = cmd.getOptionValue("p");
+		if(cmd.hasOption("hp")){
+			Configs.HdfsConfig.HDFS_PATH = cmd.getOptionValue("hp");
+		}
+		if(cmd.hasOption("tad")){
+			Configs.BaseConfig.url = "http://"+cmd.getOptionValue("tad")+"/api/put";
 		}
 		if(cmd.hasOption("z")){
 			System.setProperty("htiiot.zookeeper", cmd.getOptionValue("z"));
@@ -39,8 +43,8 @@ public class Cmd {
 		}
 
 		if(cmd.hasOption("d")){
-			Configs.BaseConfig.url="http://127.0.0.1:4242/api/put?details";
-			Configs.BaseConfig.log=true;
+			Configs.BaseConfig.url = Configs.BaseConfig.url+"?details";
+			Configs.BaseConfig.log = true;
 		}
 		
 	}

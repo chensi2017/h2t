@@ -25,19 +25,29 @@ public class Start {
         //directory path
         String dir = Configs.HdfsConfig.HDFS_PATH;
         log.info("已启动解析程序...");
+        //print config info
+        log.info(Configs.getConf());
         long startTime = System.currentTimeMillis();
         Configuration conf = new Configuration();
         try {
             FileSystem fs = FileSystem.get(URI.create(dir),conf);
-            System.out.println(URI.create(dir));
             List<Path> fList = Tools.getFileList(dir, fs);
             HFileAnalysis analysis = new HFileAnalysis();
-            for(Path p : fList){
-                analysis.analysis(p,fs);
+            List<Path>[] pathArr = Tools.avgList(fList, Configs.BaseConfig.threads);
+            for(List<Path> pathL:pathArr){
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(Path p:pathL){
+                            analysis.analysis(p,fs);
+                        }
+                    }
+                }).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //statistics
         new Thread(new Runnable() {
             private long oldcount = 0;
             @Override
@@ -57,6 +67,5 @@ public class Start {
                 }
             }
         }).start();
-
     }
 }
