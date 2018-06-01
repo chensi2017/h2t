@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSON;
 import com.htdata.iiot.hdfs2tsdb.tool.HFileAnalysis;
 import com.htdata.iiot.hdfs2tsdb.tool.Tools;
 import org.apache.commons.lang.StringUtils;
@@ -6,9 +7,10 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class FileTest {
     public static void main(String[] args) {
@@ -43,4 +45,5 @@ public class FileTest {
         System.out.println(ss.length);
 
     }
+
 }

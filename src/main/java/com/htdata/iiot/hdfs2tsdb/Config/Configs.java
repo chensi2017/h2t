@@ -11,6 +11,7 @@ public class Configs {
     }
     public static final class HdfsConfig{
         public static String HDFS_PATH = "";
+        public static int READ_LINE = 20;
 
     }
 

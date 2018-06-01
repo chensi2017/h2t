@@ -10,6 +10,7 @@ public class Cmd {
 		options.addOption("t", "threads", true, "The number of threads,advice set as the numbers of the partition");
 		options.addOption("hp","hdfspath",true,"The directory path in HDFS");
 		options.addOption("tad","tsdbapiaddr",true,"The tsdb api address");
+		options.addOption("l","lines",true,"Read lines from HDFS file");
 		options.addOption("z", "zookeeper", true, "The connection info of zk,like:master.htdata.com:2181");
 		options.addOption("d", "debug", false, "debug");
 		CommandLine cmd=null;
@@ -31,6 +32,10 @@ public class Cmd {
 		if(cmd.hasOption("hp")){
 			Configs.HdfsConfig.HDFS_PATH = cmd.getOptionValue("hp");
 		}
+		if(cmd.hasOption("l")){
+			Configs.HdfsConfig.READ_LINE = Integer.parseInt(cmd.getOptionValue("l"));
+		}
+
 		if(cmd.hasOption("tad")){
 			Configs.BaseConfig.url = "http://"+cmd.getOptionValue("tad")+"/api/put";
 		}
