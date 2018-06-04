@@ -13,7 +13,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.concurrent.atomic.LongAdder;
 
-
 public class Start {
 
     private static Logger log = Logger.getLogger(Start.class);
@@ -38,6 +37,7 @@ public class Start {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        System.setProperty("HADOOP_USER_NAME", "hdfs");
                         for(Path p:pathL){
                             analysis.analysis(p,fs);
                         }

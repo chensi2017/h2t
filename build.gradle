@@ -39,14 +39,13 @@ applicationDistribution.from('src/main/resources/conf'){
 dependencies {
     compile('redis.clients:jedis:2.9.0')
     compile group: 'com.alibaba', name: 'fastjson', version:'1.2.31'
-    compile group: 'com.htiiot.common', name: 'common-shared', version:'0.0.1-SNAPSHOT'
-    compile ('org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version:'1.5.4.RELEASE'
+//    compile ('org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE') {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//    }
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version:'1.5.4.RELEASE'
 
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
-    compile ('com.zaxxer:HikariCP:2.5.1')
+//    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+//    compile ('com.zaxxer:HikariCP:2.5.1')
     compile ('net.opentsdb:opentsdb:2.3.0') {
         exclude group: 'io.netty', module: 'netty'
         exclude group: 'ch.qos.logback', module: 'logback-core'

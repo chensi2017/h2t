@@ -6,7 +6,6 @@ import com.htdata.iiot.hdfs2tsdb.Start;
 import com.htdata.iiot.hdfs2tsdb.pojo.DataPoint;
 import com.htdata.iiot.hdfs2tsdb.pojo.StreamingData;
 import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
